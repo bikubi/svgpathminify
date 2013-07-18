@@ -10,7 +10,9 @@ while ($line = fgets(STDIN)) $xml .= $line;
 
 $dom = new DOMDocument;
 $dom->loadXML($xml);
-$dom->preserveWhiteSpace = false; /* we're minifying anyway */
+/* we're minifying anyway */
+$dom->preserveWhiteSpace = false;
+$dom->formatOutput = false;
 
 $nodes = $dom->getElementsByTagName('path');
 
@@ -27,7 +29,7 @@ foreach ($nodes as $node) {
 				? (round($f * $div) / $div)
 				: $_;
 		}
-		$node->setAttribute('d', $dmin);
+		$node->setAttribute('d', trim($dmin));
 	}
 }
 
