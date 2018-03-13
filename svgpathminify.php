@@ -1,8 +1,11 @@
 #!/usr/bin/php
 <?php
 
-/* we can suppress "undefined offset", this defaults to 1 */
-$div = @pow(10, intval($_SERVER['argv'][1]));
+$accu = floatval($_SERVER['argv'][1]);
+if ($accu != round($accu)) {
+	fwrite(STDERR, "Warning: accuracy is a float, might not minify\n");
+}
+$div = pow(10, $accu);
 
 $xml = '';
 
